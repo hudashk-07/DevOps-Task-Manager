@@ -1,0 +1,7 @@
+# Optional override: publish MongoDB on the host (loopback only) so the API can be
+# run with "npm start". Use a different port if 27017 is taken:
+#   MONGO_HOST_PORT=27018 docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d mongo
+services:
+  mongo:
+    ports:
+      - "127.0.0.1:${MONGO_HOST_PORT:-27017}:27017"

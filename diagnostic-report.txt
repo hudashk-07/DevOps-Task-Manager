@@ -1,0 +1,600 @@
+===== PROJECT FILES =====
+./deploy-k8s.bat
+./diagnostic-report.txt
+./docker-compose.dev.yml
+./docker-compose.yml
+./Dockerfile
+./.dockerignore
+./.env.example
+./.gitattributes
+./.github/workflows/ci-cd.yml
+./.gitignore
+./k8s/api-deployment.yaml
+./k8s/api-service.yaml
+./k8s/configmap.yaml
+./k8s/examples/secret.example.yaml
+./k8s/mongo-deployment.yaml
+./k8s/mongo-pvc.yaml
+./k8s/mongo-service.yaml
+./k8s/namespace.yaml
+./k8s/secret.yaml
+./logs/compose-up.log
+./logs/launcher.log
+./package.json
+./package-lock.json
+./PROJECT_INFO.txt
+./public/index.html
+./README.md
+./run-docker.bat
+./run-local.bat
+./.run/run.lock
+./run.sh
+./src/app.js
+./src/config/db.js
+./src/controllers/taskController.js
+./src/models/Task.js
+./src/routes/taskRoutes.js
+./src/server.js
+./tests/deploy-config.test.js
+./tests/task.test.js
+===== GIT STATUS =====
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   .dockerignore
+	modified:   .env.example
+	modified:   .github/workflows/ci-cd.yml
+	modified:   .gitignore
+	modified:   Dockerfile
+	modified:   README.md
+	modified:   deploy-k8s.bat
+	modified:   docker-compose.yml
+	modified:   k8s/api-deployment.yaml
+	modified:   k8s/mongo-deployment.yaml
+	modified:   run-local.bat
+	modified:   tests/task.test.js
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	diagnostic-report.txt
+	docker-compose.dev.yml
+	k8s/examples/
+	run.sh
+	tests/deploy-config.test.js
+
+no changes added to commit (use "git add" and/or "git commit -a")
+af2a02e Updated UI
+ec5488c Fixed Bugs
+10a6180 Added Terminal in the UI
+407770a Added UI
+a66e73c Initial Commit
+origin	https://github.com/Arman-6/DevOps-Task-Manager.git (fetch)
+origin	https://github.com/Arman-6/DevOps-Task-Manager.git (push)
+===== DOCKER =====
+NAME             DESCRIPTION                               DOCKER ENDPOINT                                  ERROR
+default          Current DOCKER_HOST based configuration   unix:///var/run/docker.sock                      
+desktop-linux    Docker Desktop                            unix:///home/arman/.docker/desktop/docker.sock   
+local-engine *                                             unix:///var/run/docker.sock                      
+Client: Docker Engine - Community
+ Version:    29.7.2
+ Context:    local-engine
+ Debug Mode: false
+ Plugins:
+  agent: Docker AI Agent Runner (Docker Inc.)
+    Version:  v1.122.0
+    Path:     /home/arman/.docker/cli-plugins/docker-agent
+  ai: Docker AI Agent - Ask Gordon (Docker Inc.)
+    Version:  v1.30.0
+    Path:     /home/arman/.docker/cli-plugins/docker-ai
+  buildx: Docker Buildx (Docker Inc.)
+    Version:  v0.36.1-desktop.1
+    Path:     /home/arman/.docker/cli-plugins/docker-buildx
+  compose: Docker Compose (Docker Inc.)
+    Version:  v5.4.0
+    Path:     /home/arman/.docker/cli-plugins/docker-compose
+  debug: Get a shell into any image or container (Docker Inc.)
+    Version:  0.0.47
+    Path:     /home/arman/.docker/cli-plugins/docker-debug
+  desktop: Docker Desktop commands (Docker Inc.)
+    Version:  v0.4.3
+    Path:     /home/arman/.docker/cli-plugins/docker-desktop
+  dhi: CLI for managing Docker Hardened Images (Docker Inc.)
+    Version:  v0.0.7
+    Path:     /home/arman/.docker/cli-plugins/docker-dhi
+  extension: Manages Docker extensions (Docker Inc.)
+    Version:  v0.2.31
+    Path:     /home/arman/.docker/cli-plugins/docker-extension
+  init: Creates Docker-related starter files for your project (Docker Inc.)
+    Version:  v1.4.0
+    Path:     /home/arman/.docker/cli-plugins/docker-init
+  mcp: Docker MCP Plugin (Docker Inc.)
+    Version:  v0.43.3
+    Path:     /home/arman/.docker/cli-plugins/docker-mcp
+  offload: Docker Offload (Docker Inc.)
+    Version:  v0.6.10
+    Path:     /home/arman/.docker/cli-plugins/docker-offload
+  pass: Docker Pass Secrets Manager Plugin (beta) (Docker Inc.)
+    Version:  v0.2.1
+    Path:     /home/arman/.docker/cli-plugins/docker-pass
+  sandbox: "docker sandbox" is deprecated, use Docker Sandboxes instead (Docker Inc.)
+    Version:  v0.13.0
+    Path:     /home/arman/.docker/cli-plugins/docker-sandbox
+  scout: Docker Scout (Docker Inc.)
+    Version:  v1.24.0
+    Path:     /home/arman/.docker/cli-plugins/docker-scout
+
+Server:
+ Containers: 5
+  Running: 5
+  Paused: 0
+  Stopped: 0
+ Images: 6
+ Server Version: 29.7.2
+ Storage Driver: overlayfs
+  driver-type: io.containerd.snapshotter.v1
+ Logging Driver: json-file
+ Cgroup Driver: systemd
+ Cgroup Version: 2
+ Plugins:
+  Volume: local
+  Network: bridge host ipvlan macvlan null overlay
+  Log: awslogs fluentd gcplogs gelf journald json-file local splunk syslog
+ CDI spec directories:
+  /etc/cdi
+  /var/run/cdi
+ Swarm: inactive
+ Runtimes: io.containerd.runc.v2 runc
+ Default Runtime: runc
+ Init Binary: docker-init
+ containerd version: aad11006b869517fcd3009450b6f82da282e1a9b
+ runc version: v1.4.3-0-gbb14dabe
+ init version: de40ad0
+ Security Options:
+  apparmor
+  seccomp
+   Profile: builtin
+  cgroupns
+ Kernel Version: 6.17.9-76061709-generic
+ Operating System: Pop!_OS 22.04 LTS
+ OSType: linux
+ Architecture: x86_64
+ CPUs: 12
+ Total Memory: 15.34GiB
+ Name: pop-os
+ ID: eadf94c6-a084-4a1d-8c1a-1588715340e2
+ Docker Root Dir: /data/docker
+ Debug Mode: false
+ Experimental: false
+ Insecure Registries:
+  ::1/128
+  127.0.0.0/8
+ Live Restore Enabled: false
+ Firewall Backend: iptables
+  EnableUserlandProxy: true
+  UserlandProxyPath: /usr/bin/docker-proxy
+
+CONTAINER ID   IMAGE                                 COMMAND                  CREATED              STATUS                        PORTS                                                                                                                                  NAMES
+b5bc3f3862e5   devops-task-manager:1.0               "docker-entrypoint.s…"   About a minute ago   Up About a minute (healthy)   0.0.0.0:5000->5000/tcp, [::]:5000->5000/tcp                                                                                            devops-task-manager-api-1
+bf40c74aab37   mongo:7                               "docker-entrypoint.s…"   5 minutes ago        Up About a minute (healthy)   27017/tcp                                                                                                                              devops-task-manager-mongo-1
+2bd680eb90c8   docker.n8n.io/n8nio/n8n:latest        "tini -- /docker-ent…"   2 hours ago          Up 12 months                  127.0.0.1:5678->5678/tcp                                                                                                               devops-agent-n8n
+25d28b168b66   gcr.io/k8s-minikube/kicbase:v0.0.51   "/usr/local/bin/entr…"   2 hours ago          Up 3 minutes                  127.0.0.1:32768->22/tcp, 127.0.0.1:32769->2376/tcp, 127.0.0.1:32770->5000/tcp, 127.0.0.1:32771->8443/tcp, 127.0.0.1:32772->32443/tcp   minikube
+e3037957f716   jenkins/jenkins:lts                   "/usr/bin/tini -- /u…"   5 weeks ago          Up 12 months                  0.0.0.0:50000->50000/tcp, [::]:50000->50000/tcp, 0.0.0.0:8081->8080/tcp, [::]:8081->8080/tcp                                           jenkins
+NAME                          IMAGE                     COMMAND                  SERVICE   CREATED              STATUS                        PORTS
+devops-task-manager-api-1     devops-task-manager:1.0   "docker-entrypoint.s…"   api       About a minute ago   Up About a minute (healthy)   0.0.0.0:5000->5000/tcp, [::]:5000->5000/tcp
+devops-task-manager-mongo-1   mongo:7                   "docker-entrypoint.s…"   mongo     5 minutes ago        Up About a minute (healthy)   27017/tcp
+api-1  | MongoDB connected
+api-1  | DevOps Task Manager API running on port 5000
+mongo-1  | {"t":{"$date":"2026-10-15T20:24:55.484+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn43","msg":"client metadata","attr":{"remote":"127.0.0.1:45638","client":"conn43","negotiatedCompressors":[],"doc":{"application":{"name":"mongosh 2.10.0"},"driver":{"name":"nodejs|mongosh","version":"7.5.0|2.10.0"},"platform":"Node.js v24.18.1, LE","os":{"name":"linux","architecture":"x64","version":"3.10.0-327.22.2.el7.x86_64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:24:55.484+00:00"},"s":"I",  "c":"ACCESS",   "id":10483900,"ctx":"conn43","msg":"Connection not authenticating","attr":{"client":"127.0.0.1:45638","doc":{"application":{"name":"mongosh 2.10.0"},"driver":{"name":"nodejs|mongosh","version":"7.5.0|2.10.0"},"platform":"Node.js v24.18.1, LE","os":{"name":"linux","architecture":"x64","version":"3.10.0-327.22.2.el7.x86_64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:24:55.487+00:00"},"s":"I",  "c":"NETWORK",  "id":6788700, "ctx":"conn43","msg":"Received first command on ingress connection since session start or auth handshake","attr":{"elapsedMillis":2}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:24:55.489+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn39","msg":"Connection ended","attr":{"remote":"127.0.0.1:45598","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"338d5e38-f40d-4449-a93c-3ad1dcb0a770"}},"connectionId":39,"connectionCount":7}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:24:55.489+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn43","msg":"Connection ended","attr":{"remote":"127.0.0.1:45638","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"f70cb776-cbb1-4954-9b4a-4fb2e29282d9"}},"connectionId":43,"connectionCount":6}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:24:55.489+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn42","msg":"Connection ended","attr":{"remote":"127.0.0.1:45626","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"a7853dfb-988c-4cde-b6a5-13ae03e018e8"}},"connectionId":42,"connectionCount":5}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:24:55.489+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn41","msg":"Connection ended","attr":{"remote":"127.0.0.1:45620","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"d0d93e0d-c570-431f-a332-d3ca66b726c9"}},"connectionId":41,"connectionCount":4}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:24:55.489+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn40","msg":"Connection ended","attr":{"remote":"127.0.0.1:45614","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"20673ca8-fa6f-4f78-8b39-cf41e3d4c832"}},"connectionId":40,"connectionCount":3}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:05.704+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"127.0.0.1:36796","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"c18dbb77-72bb-4641-9a71-46bf9ceb787f"}},"connectionId":44,"connectionCount":4}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:05.706+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn44","msg":"client metadata","attr":{"remote":"127.0.0.1:36796","client":"conn44","negotiatedCompressors":[],"doc":{"application":{"name":"mongosh 2.10.0"},"driver":{"name":"nodejs|mongosh","version":"7.5.0|2.10.0"},"platform":"Node.js v24.18.1, LE","os":{"name":"linux","architecture":"x64","version":"3.10.0-327.22.2.el7.x86_64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:05.706+00:00"},"s":"I",  "c":"ACCESS",   "id":10483900,"ctx":"conn44","msg":"Connection not authenticating","attr":{"client":"127.0.0.1:36796","doc":{"application":{"name":"mongosh 2.10.0"},"driver":{"name":"nodejs|mongosh","version":"7.5.0|2.10.0"},"platform":"Node.js v24.18.1, LE","os":{"name":"linux","architecture":"x64","version":"3.10.0-327.22.2.el7.x86_64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:05.709+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"127.0.0.1:36808","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"b355c8c9-7ce7-45d0-96e2-00db8de10dbc"}},"connectionId":45,"connectionCount":5}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:05.709+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn45","msg":"client metadata","attr":{"remote":"127.0.0.1:36808","client":"conn45","negotiatedCompressors":[],"doc":{"application":{"name":"mongosh 2.10.0"},"driver":{"name":"nodejs|mongosh","version":"7.5.0|2.10.0"},"platform":"Node.js v24.18.1, LE","os":{"name":"linux","architecture":"x64","version":"3.10.0-327.22.2.el7.x86_64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:05.709+00:00"},"s":"I",  "c":"ACCESS",   "id":10483900,"ctx":"conn45","msg":"Connection not authenticating","attr":{"client":"127.0.0.1:36808","doc":{"application":{"name":"mongosh 2.10.0"},"driver":{"name":"nodejs|mongosh","version":"7.5.0|2.10.0"},"platform":"Node.js v24.18.1, LE","os":{"name":"linux","architecture":"x64","version":"3.10.0-327.22.2.el7.x86_64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:05.718+00:00"},"s":"I",  "c":"NETWORK",  "id":6788700, "ctx":"conn45","msg":"Received first command on ingress connection since session start or auth handshake","attr":{"elapsedMillis":8}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:05.783+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"127.0.0.1:36820","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"a7918fd4-f10d-4c18-8f71-54300cc80197"}},"connectionId":46,"connectionCount":6}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:05.783+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"127.0.0.1:36834","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"51363da2-6850-4b31-8014-af2481a5c567"}},"connectionId":47,"connectionCount":7}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:05.785+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn46","msg":"client metadata","attr":{"remote":"127.0.0.1:36820","client":"conn46","negotiatedCompressors":[],"doc":{"application":{"name":"mongosh 2.10.0"},"driver":{"name":"nodejs|mongosh","version":"7.5.0|2.10.0"},"platform":"Node.js v24.18.1, LE","os":{"name":"linux","architecture":"x64","version":"3.10.0-327.22.2.el7.x86_64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:05.785+00:00"},"s":"I",  "c":"ACCESS",   "id":10483900,"ctx":"conn46","msg":"Connection not authenticating","attr":{"client":"127.0.0.1:36820","doc":{"application":{"name":"mongosh 2.10.0"},"driver":{"name":"nodejs|mongosh","version":"7.5.0|2.10.0"},"platform":"Node.js v24.18.1, LE","os":{"name":"linux","architecture":"x64","version":"3.10.0-327.22.2.el7.x86_64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:05.785+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn47","msg":"client metadata","attr":{"remote":"127.0.0.1:36834","client":"conn47","negotiatedCompressors":[],"doc":{"application":{"name":"mongosh 2.10.0"},"driver":{"name":"nodejs|mongosh","version":"7.5.0|2.10.0"},"platform":"Node.js v24.18.1, LE","os":{"name":"linux","architecture":"x64","version":"3.10.0-327.22.2.el7.x86_64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:05.785+00:00"},"s":"I",  "c":"ACCESS",   "id":10483900,"ctx":"conn47","msg":"Connection not authenticating","attr":{"client":"127.0.0.1:36834","doc":{"application":{"name":"mongosh 2.10.0"},"driver":{"name":"nodejs|mongosh","version":"7.5.0|2.10.0"},"platform":"Node.js v24.18.1, LE","os":{"name":"linux","architecture":"x64","version":"3.10.0-327.22.2.el7.x86_64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:05.787+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"127.0.0.1:36838","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"c01ac4ae-7a02-47f3-801e-16295dc54573"}},"connectionId":48,"connectionCount":8}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:05.788+00:00"},"s":"I",  "c":"NETWORK",  "id":6788700, "ctx":"conn47","msg":"Received first command on ingress connection since session start or auth handshake","attr":{"elapsedMillis":2}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:05.789+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn48","msg":"client metadata","attr":{"remote":"127.0.0.1:36838","client":"conn48","negotiatedCompressors":[],"doc":{"application":{"name":"mongosh 2.10.0"},"driver":{"name":"nodejs|mongosh","version":"7.5.0|2.10.0"},"platform":"Node.js v24.18.1, LE","os":{"name":"linux","architecture":"x64","version":"3.10.0-327.22.2.el7.x86_64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:05.789+00:00"},"s":"I",  "c":"ACCESS",   "id":10483900,"ctx":"conn48","msg":"Connection not authenticating","attr":{"client":"127.0.0.1:36838","doc":{"application":{"name":"mongosh 2.10.0"},"driver":{"name":"nodejs|mongosh","version":"7.5.0|2.10.0"},"platform":"Node.js v24.18.1, LE","os":{"name":"linux","architecture":"x64","version":"3.10.0-327.22.2.el7.x86_64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:05.792+00:00"},"s":"I",  "c":"NETWORK",  "id":6788700, "ctx":"conn48","msg":"Received first command on ingress connection since session start or auth handshake","attr":{"elapsedMillis":3}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:05.794+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn44","msg":"Connection ended","attr":{"remote":"127.0.0.1:36796","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"c18dbb77-72bb-4641-9a71-46bf9ceb787f"}},"connectionId":44,"connectionCount":7}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:05.794+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn48","msg":"Connection ended","attr":{"remote":"127.0.0.1:36838","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"c01ac4ae-7a02-47f3-801e-16295dc54573"}},"connectionId":48,"connectionCount":6}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:05.795+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn47","msg":"Connection ended","attr":{"remote":"127.0.0.1:36834","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"51363da2-6850-4b31-8014-af2481a5c567"}},"connectionId":47,"connectionCount":5}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:05.795+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn46","msg":"Connection ended","attr":{"remote":"127.0.0.1:36820","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"a7918fd4-f10d-4c18-8f71-54300cc80197"}},"connectionId":46,"connectionCount":4}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:05.795+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn45","msg":"Connection ended","attr":{"remote":"127.0.0.1:36808","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"b355c8c9-7ce7-45d0-96e2-00db8de10dbc"}},"connectionId":45,"connectionCount":3}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:16.005+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"127.0.0.1:45508","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"47e7ede9-9531-4586-9c67-a1ca82d00572"}},"connectionId":49,"connectionCount":4}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:16.007+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn49","msg":"client metadata","attr":{"remote":"127.0.0.1:45508","client":"conn49","negotiatedCompressors":[],"doc":{"application":{"name":"mongosh 2.10.0"},"driver":{"name":"nodejs|mongosh","version":"7.5.0|2.10.0"},"platform":"Node.js v24.18.1, LE","os":{"name":"linux","architecture":"x64","version":"3.10.0-327.22.2.el7.x86_64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:16.007+00:00"},"s":"I",  "c":"ACCESS",   "id":10483900,"ctx":"conn49","msg":"Connection not authenticating","attr":{"client":"127.0.0.1:45508","doc":{"application":{"name":"mongosh 2.10.0"},"driver":{"name":"nodejs|mongosh","version":"7.5.0|2.10.0"},"platform":"Node.js v24.18.1, LE","os":{"name":"linux","architecture":"x64","version":"3.10.0-327.22.2.el7.x86_64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:16.010+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"127.0.0.1:45524","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"689af9a4-ef37-40d9-99a2-35442f63035e"}},"connectionId":50,"connectionCount":5}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:16.010+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn50","msg":"client metadata","attr":{"remote":"127.0.0.1:45524","client":"conn50","negotiatedCompressors":[],"doc":{"application":{"name":"mongosh 2.10.0"},"driver":{"name":"nodejs|mongosh","version":"7.5.0|2.10.0"},"platform":"Node.js v24.18.1, LE","os":{"name":"linux","architecture":"x64","version":"3.10.0-327.22.2.el7.x86_64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:16.010+00:00"},"s":"I",  "c":"ACCESS",   "id":10483900,"ctx":"conn50","msg":"Connection not authenticating","attr":{"client":"127.0.0.1:45524","doc":{"application":{"name":"mongosh 2.10.0"},"driver":{"name":"nodejs|mongosh","version":"7.5.0|2.10.0"},"platform":"Node.js v24.18.1, LE","os":{"name":"linux","architecture":"x64","version":"3.10.0-327.22.2.el7.x86_64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:16.019+00:00"},"s":"I",  "c":"NETWORK",  "id":6788700, "ctx":"conn50","msg":"Received first command on ingress connection since session start or auth handshake","attr":{"elapsedMillis":9}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:16.086+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"127.0.0.1:45530","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"89f0216f-f68b-4c5d-afb2-d474a485e823"}},"connectionId":51,"connectionCount":6}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:16.086+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"127.0.0.1:45538","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"e698ab52-9cad-478f-94d5-086458c16afe"}},"connectionId":52,"connectionCount":7}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:16.088+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn51","msg":"client metadata","attr":{"remote":"127.0.0.1:45530","client":"conn51","negotiatedCompressors":[],"doc":{"application":{"name":"mongosh 2.10.0"},"driver":{"name":"nodejs|mongosh","version":"7.5.0|2.10.0"},"platform":"Node.js v24.18.1, LE","os":{"name":"linux","architecture":"x64","version":"3.10.0-327.22.2.el7.x86_64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:16.088+00:00"},"s":"I",  "c":"ACCESS",   "id":10483900,"ctx":"conn51","msg":"Connection not authenticating","attr":{"client":"127.0.0.1:45530","doc":{"application":{"name":"mongosh 2.10.0"},"driver":{"name":"nodejs|mongosh","version":"7.5.0|2.10.0"},"platform":"Node.js v24.18.1, LE","os":{"name":"linux","architecture":"x64","version":"3.10.0-327.22.2.el7.x86_64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:16.088+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn52","msg":"client metadata","attr":{"remote":"127.0.0.1:45538","client":"conn52","negotiatedCompressors":[],"doc":{"application":{"name":"mongosh 2.10.0"},"driver":{"name":"nodejs|mongosh","version":"7.5.0|2.10.0"},"platform":"Node.js v24.18.1, LE","os":{"name":"linux","architecture":"x64","version":"3.10.0-327.22.2.el7.x86_64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:16.088+00:00"},"s":"I",  "c":"ACCESS",   "id":10483900,"ctx":"conn52","msg":"Connection not authenticating","attr":{"client":"127.0.0.1:45538","doc":{"application":{"name":"mongosh 2.10.0"},"driver":{"name":"nodejs|mongosh","version":"7.5.0|2.10.0"},"platform":"Node.js v24.18.1, LE","os":{"name":"linux","architecture":"x64","version":"3.10.0-327.22.2.el7.x86_64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:16.090+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"127.0.0.1:45544","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"aa288219-2c90-4cda-8df0-46b7dcfadf72"}},"connectionId":53,"connectionCount":8}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:16.091+00:00"},"s":"I",  "c":"NETWORK",  "id":6788700, "ctx":"conn52","msg":"Received first command on ingress connection since session start or auth handshake","attr":{"elapsedMillis":2}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:16.092+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn53","msg":"client metadata","attr":{"remote":"127.0.0.1:45544","client":"conn53","negotiatedCompressors":[],"doc":{"application":{"name":"mongosh 2.10.0"},"driver":{"name":"nodejs|mongosh","version":"7.5.0|2.10.0"},"platform":"Node.js v24.18.1, LE","os":{"name":"linux","architecture":"x64","version":"3.10.0-327.22.2.el7.x86_64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:16.092+00:00"},"s":"I",  "c":"ACCESS",   "id":10483900,"ctx":"conn53","msg":"Connection not authenticating","attr":{"client":"127.0.0.1:45544","doc":{"application":{"name":"mongosh 2.10.0"},"driver":{"name":"nodejs|mongosh","version":"7.5.0|2.10.0"},"platform":"Node.js v24.18.1, LE","os":{"name":"linux","architecture":"x64","version":"3.10.0-327.22.2.el7.x86_64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:16.095+00:00"},"s":"I",  "c":"NETWORK",  "id":6788700, "ctx":"conn53","msg":"Received first command on ingress connection since session start or auth handshake","attr":{"elapsedMillis":3}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:16.098+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn49","msg":"Connection ended","attr":{"remote":"127.0.0.1:45508","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"47e7ede9-9531-4586-9c67-a1ca82d00572"}},"connectionId":49,"connectionCount":7}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:16.098+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn53","msg":"Connection ended","attr":{"remote":"127.0.0.1:45544","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"aa288219-2c90-4cda-8df0-46b7dcfadf72"}},"connectionId":53,"connectionCount":6}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:16.098+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn52","msg":"Connection ended","attr":{"remote":"127.0.0.1:45538","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"e698ab52-9cad-478f-94d5-086458c16afe"}},"connectionId":52,"connectionCount":5}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:16.098+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn51","msg":"Connection ended","attr":{"remote":"127.0.0.1:45530","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"89f0216f-f68b-4c5d-afb2-d474a485e823"}},"connectionId":51,"connectionCount":4}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:16.098+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn50","msg":"Connection ended","attr":{"remote":"127.0.0.1:45524","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"689af9a4-ef37-40d9-99a2-35442f63035e"}},"connectionId":50,"connectionCount":3}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:26.362+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"127.0.0.1:55838","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"181f4071-517d-4d79-9dcf-92e546bda73d"}},"connectionId":54,"connectionCount":4}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:26.364+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn54","msg":"client metadata","attr":{"remote":"127.0.0.1:55838","client":"conn54","negotiatedCompressors":[],"doc":{"application":{"name":"mongosh 2.10.0"},"driver":{"name":"nodejs|mongosh","version":"7.5.0|2.10.0"},"platform":"Node.js v24.18.1, LE","os":{"name":"linux","architecture":"x64","version":"3.10.0-327.22.2.el7.x86_64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:26.364+00:00"},"s":"I",  "c":"ACCESS",   "id":10483900,"ctx":"conn54","msg":"Connection not authenticating","attr":{"client":"127.0.0.1:55838","doc":{"application":{"name":"mongosh 2.10.0"},"driver":{"name":"nodejs|mongosh","version":"7.5.0|2.10.0"},"platform":"Node.js v24.18.1, LE","os":{"name":"linux","architecture":"x64","version":"3.10.0-327.22.2.el7.x86_64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:26.367+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"127.0.0.1:55844","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"3e87fe32-31f5-4506-9c4c-ac04acb36e37"}},"connectionId":55,"connectionCount":5}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:26.368+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn55","msg":"client metadata","attr":{"remote":"127.0.0.1:55844","client":"conn55","negotiatedCompressors":[],"doc":{"application":{"name":"mongosh 2.10.0"},"driver":{"name":"nodejs|mongosh","version":"7.5.0|2.10.0"},"platform":"Node.js v24.18.1, LE","os":{"name":"linux","architecture":"x64","version":"3.10.0-327.22.2.el7.x86_64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:26.368+00:00"},"s":"I",  "c":"ACCESS",   "id":10483900,"ctx":"conn55","msg":"Connection not authenticating","attr":{"client":"127.0.0.1:55844","doc":{"application":{"name":"mongosh 2.10.0"},"driver":{"name":"nodejs|mongosh","version":"7.5.0|2.10.0"},"platform":"Node.js v24.18.1, LE","os":{"name":"linux","architecture":"x64","version":"3.10.0-327.22.2.el7.x86_64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:26.378+00:00"},"s":"I",  "c":"NETWORK",  "id":6788700, "ctx":"conn55","msg":"Received first command on ingress connection since session start or auth handshake","attr":{"elapsedMillis":9}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:26.456+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"127.0.0.1:55858","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"08aeefdb-c0f2-424c-8d63-f5e307818698"}},"connectionId":56,"connectionCount":6}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:26.456+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"127.0.0.1:55868","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"1fd00313-e016-4eb1-87c0-3dd1b73dbca7"}},"connectionId":57,"connectionCount":7}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:26.459+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn56","msg":"client metadata","attr":{"remote":"127.0.0.1:55858","client":"conn56","negotiatedCompressors":[],"doc":{"application":{"name":"mongosh 2.10.0"},"driver":{"name":"nodejs|mongosh","version":"7.5.0|2.10.0"},"platform":"Node.js v24.18.1, LE","os":{"name":"linux","architecture":"x64","version":"3.10.0-327.22.2.el7.x86_64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:26.459+00:00"},"s":"I",  "c":"ACCESS",   "id":10483900,"ctx":"conn56","msg":"Connection not authenticating","attr":{"client":"127.0.0.1:55858","doc":{"application":{"name":"mongosh 2.10.0"},"driver":{"name":"nodejs|mongosh","version":"7.5.0|2.10.0"},"platform":"Node.js v24.18.1, LE","os":{"name":"linux","architecture":"x64","version":"3.10.0-327.22.2.el7.x86_64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:26.459+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn57","msg":"client metadata","attr":{"remote":"127.0.0.1:55868","client":"conn57","negotiatedCompressors":[],"doc":{"application":{"name":"mongosh 2.10.0"},"driver":{"name":"nodejs|mongosh","version":"7.5.0|2.10.0"},"platform":"Node.js v24.18.1, LE","os":{"name":"linux","architecture":"x64","version":"3.10.0-327.22.2.el7.x86_64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:26.459+00:00"},"s":"I",  "c":"ACCESS",   "id":10483900,"ctx":"conn57","msg":"Connection not authenticating","attr":{"client":"127.0.0.1:55868","doc":{"application":{"name":"mongosh 2.10.0"},"driver":{"name":"nodejs|mongosh","version":"7.5.0|2.10.0"},"platform":"Node.js v24.18.1, LE","os":{"name":"linux","architecture":"x64","version":"3.10.0-327.22.2.el7.x86_64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:26.461+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"127.0.0.1:55870","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"c5693f06-5f4f-4876-9621-f4d19724aca3"}},"connectionId":58,"connectionCount":8}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:26.462+00:00"},"s":"I",  "c":"NETWORK",  "id":6788700, "ctx":"conn57","msg":"Received first command on ingress connection since session start or auth handshake","attr":{"elapsedMillis":3}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:26.463+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn58","msg":"client metadata","attr":{"remote":"127.0.0.1:55870","client":"conn58","negotiatedCompressors":[],"doc":{"application":{"name":"mongosh 2.10.0"},"driver":{"name":"nodejs|mongosh","version":"7.5.0|2.10.0"},"platform":"Node.js v24.18.1, LE","os":{"name":"linux","architecture":"x64","version":"3.10.0-327.22.2.el7.x86_64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:26.463+00:00"},"s":"I",  "c":"ACCESS",   "id":10483900,"ctx":"conn58","msg":"Connection not authenticating","attr":{"client":"127.0.0.1:55870","doc":{"application":{"name":"mongosh 2.10.0"},"driver":{"name":"nodejs|mongosh","version":"7.5.0|2.10.0"},"platform":"Node.js v24.18.1, LE","os":{"name":"linux","architecture":"x64","version":"3.10.0-327.22.2.el7.x86_64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:26.467+00:00"},"s":"I",  "c":"NETWORK",  "id":6788700, "ctx":"conn58","msg":"Received first command on ingress connection since session start or auth handshake","attr":{"elapsedMillis":4}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:26.470+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn54","msg":"Connection ended","attr":{"remote":"127.0.0.1:55838","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"181f4071-517d-4d79-9dcf-92e546bda73d"}},"connectionId":54,"connectionCount":7}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:26.470+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn58","msg":"Connection ended","attr":{"remote":"127.0.0.1:55870","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"c5693f06-5f4f-4876-9621-f4d19724aca3"}},"connectionId":58,"connectionCount":6}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:26.470+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn57","msg":"Connection ended","attr":{"remote":"127.0.0.1:55868","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"1fd00313-e016-4eb1-87c0-3dd1b73dbca7"}},"connectionId":57,"connectionCount":5}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:26.470+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn56","msg":"Connection ended","attr":{"remote":"127.0.0.1:55858","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"08aeefdb-c0f2-424c-8d63-f5e307818698"}},"connectionId":56,"connectionCount":4}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:26.470+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn55","msg":"Connection ended","attr":{"remote":"127.0.0.1:55844","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"3e87fe32-31f5-4506-9c4c-ac04acb36e37"}},"connectionId":55,"connectionCount":3}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:27.208+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"127.0.0.1:55876","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"d3409712-ea91-46da-a328-9125fa6f5219"}},"connectionId":59,"connectionCount":4}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:27.210+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn59","msg":"client metadata","attr":{"remote":"127.0.0.1:55876","client":"conn59","negotiatedCompressors":[],"doc":{"application":{"name":"mongosh 2.10.0"},"driver":{"name":"nodejs|mongosh","version":"7.5.0|2.10.0"},"platform":"Node.js v24.18.1, LE","os":{"name":"linux","architecture":"x64","version":"3.10.0-327.22.2.el7.x86_64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:27.210+00:00"},"s":"I",  "c":"ACCESS",   "id":10483900,"ctx":"conn59","msg":"Connection not authenticating","attr":{"client":"127.0.0.1:55876","doc":{"application":{"name":"mongosh 2.10.0"},"driver":{"name":"nodejs|mongosh","version":"7.5.0|2.10.0"},"platform":"Node.js v24.18.1, LE","os":{"name":"linux","architecture":"x64","version":"3.10.0-327.22.2.el7.x86_64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:27.212+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"127.0.0.1:55884","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"3215ff35-da97-4fa9-827b-12d991791143"}},"connectionId":60,"connectionCount":5}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:27.213+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn60","msg":"client metadata","attr":{"remote":"127.0.0.1:55884","client":"conn60","negotiatedCompressors":[],"doc":{"application":{"name":"mongosh 2.10.0"},"driver":{"name":"nodejs|mongosh","version":"7.5.0|2.10.0"},"platform":"Node.js v24.18.1, LE","os":{"name":"linux","architecture":"x64","version":"3.10.0-327.22.2.el7.x86_64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:27.213+00:00"},"s":"I",  "c":"ACCESS",   "id":10483900,"ctx":"conn60","msg":"Connection not authenticating","attr":{"client":"127.0.0.1:55884","doc":{"application":{"name":"mongosh 2.10.0"},"driver":{"name":"nodejs|mongosh","version":"7.5.0|2.10.0"},"platform":"Node.js v24.18.1, LE","os":{"name":"linux","architecture":"x64","version":"3.10.0-327.22.2.el7.x86_64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:27.221+00:00"},"s":"I",  "c":"NETWORK",  "id":6788700, "ctx":"conn60","msg":"Received first command on ingress connection since session start or auth handshake","attr":{"elapsedMillis":8}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:27.283+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"127.0.0.1:55898","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"fd2b5473-1c75-4ee3-b2df-95718b1d004e"}},"connectionId":61,"connectionCount":6}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:27.283+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"127.0.0.1:55912","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"3311bbe8-fd3c-4987-8743-3e606f586e6c"}},"connectionId":62,"connectionCount":7}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:27.285+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn61","msg":"client metadata","attr":{"remote":"127.0.0.1:55898","client":"conn61","negotiatedCompressors":[],"doc":{"application":{"name":"mongosh 2.10.0"},"driver":{"name":"nodejs|mongosh","version":"7.5.0|2.10.0"},"platform":"Node.js v24.18.1, LE","os":{"name":"linux","architecture":"x64","version":"3.10.0-327.22.2.el7.x86_64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:27.285+00:00"},"s":"I",  "c":"ACCESS",   "id":10483900,"ctx":"conn61","msg":"Connection not authenticating","attr":{"client":"127.0.0.1:55898","doc":{"application":{"name":"mongosh 2.10.0"},"driver":{"name":"nodejs|mongosh","version":"7.5.0|2.10.0"},"platform":"Node.js v24.18.1, LE","os":{"name":"linux","architecture":"x64","version":"3.10.0-327.22.2.el7.x86_64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:27.285+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn62","msg":"client metadata","attr":{"remote":"127.0.0.1:55912","client":"conn62","negotiatedCompressors":[],"doc":{"application":{"name":"mongosh 2.10.0"},"driver":{"name":"nodejs|mongosh","version":"7.5.0|2.10.0"},"platform":"Node.js v24.18.1, LE","os":{"name":"linux","architecture":"x64","version":"3.10.0-327.22.2.el7.x86_64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:27.285+00:00"},"s":"I",  "c":"ACCESS",   "id":10483900,"ctx":"conn62","msg":"Connection not authenticating","attr":{"client":"127.0.0.1:55912","doc":{"application":{"name":"mongosh 2.10.0"},"driver":{"name":"nodejs|mongosh","version":"7.5.0|2.10.0"},"platform":"Node.js v24.18.1, LE","os":{"name":"linux","architecture":"x64","version":"3.10.0-327.22.2.el7.x86_64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:27.287+00:00"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"127.0.0.1:55922","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"90dbbc37-4d9f-46b6-89b1-9be4694de6e5"}},"connectionId":63,"connectionCount":8}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:27.288+00:00"},"s":"I",  "c":"NETWORK",  "id":6788700, "ctx":"conn62","msg":"Received first command on ingress connection since session start or auth handshake","attr":{"elapsedMillis":2}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:27.288+00:00"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn63","msg":"client metadata","attr":{"remote":"127.0.0.1:55922","client":"conn63","negotiatedCompressors":[],"doc":{"application":{"name":"mongosh 2.10.0"},"driver":{"name":"nodejs|mongosh","version":"7.5.0|2.10.0"},"platform":"Node.js v24.18.1, LE","os":{"name":"linux","architecture":"x64","version":"3.10.0-327.22.2.el7.x86_64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:27.288+00:00"},"s":"I",  "c":"ACCESS",   "id":10483900,"ctx":"conn63","msg":"Connection not authenticating","attr":{"client":"127.0.0.1:55922","doc":{"application":{"name":"mongosh 2.10.0"},"driver":{"name":"nodejs|mongosh","version":"7.5.0|2.10.0"},"platform":"Node.js v24.18.1, LE","os":{"name":"linux","architecture":"x64","version":"3.10.0-327.22.2.el7.x86_64","type":"Linux"},"env":{"container":{"runtime":"docker"}}}}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:27.291+00:00"},"s":"I",  "c":"NETWORK",  "id":6788700, "ctx":"conn63","msg":"Received first command on ingress connection since session start or auth handshake","attr":{"elapsedMillis":2}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:27.293+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn59","msg":"Connection ended","attr":{"remote":"127.0.0.1:55876","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"d3409712-ea91-46da-a328-9125fa6f5219"}},"connectionId":59,"connectionCount":7}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:27.293+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn63","msg":"Connection ended","attr":{"remote":"127.0.0.1:55922","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"90dbbc37-4d9f-46b6-89b1-9be4694de6e5"}},"connectionId":63,"connectionCount":6}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:27.293+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn62","msg":"Connection ended","attr":{"remote":"127.0.0.1:55912","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"3311bbe8-fd3c-4987-8743-3e606f586e6c"}},"connectionId":62,"connectionCount":5}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:27.293+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn61","msg":"Connection ended","attr":{"remote":"127.0.0.1:55898","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"fd2b5473-1c75-4ee3-b2df-95718b1d004e"}},"connectionId":61,"connectionCount":4}}
+mongo-1  | {"t":{"$date":"2026-10-15T20:25:27.294+00:00"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn60","msg":"Connection ended","attr":{"remote":"127.0.0.1:55884","isLoadBalanced":false,"uuid":{"uuid":{"$uuid":"3215ff35-da97-4fa9-827b-12d991791143"}},"connectionId":60,"connectionCount":3}}
+===== PROJECT CHECK =====
+
+------------------------------------------------------------
+CHECK: prerequisites (read-only)
+------------------------------------------------------------
+OK    File present: Dockerfile
+OK    File present: docker-compose.yml
+OK    File present: docker-compose.dev.yml
+OK    File present: package.json
+OK    File present: src/server.js
+OK    File present: k8s/namespace.yaml
+OK    File present: .github/workflows/ci-cd.yml
+OK    run.sh syntax is valid
+OK    Command available: docker
+OK    Command available: curl
+OK    Command available: git
+OK    Optional command available: node
+OK    Optional command available: kubectl
+OK    Optional command available: gh
+WARN  Optional command not installed: shellcheck
+OK    Docker daemon reachable
+OK    docker-compose.yml is valid
+OK    Port 5000: served by this project
+OK    Kubernetes cluster reachable (context 'minikube')
+
+------------------------------------------------------------
+SUMMARY
+------------------------------------------------------------
+  OK    File present: Dockerfile
+  OK    File present: docker-compose.yml
+  OK    File present: docker-compose.dev.yml
+  OK    File present: package.json
+  OK    File present: src/server.js
+  OK    File present: k8s/namespace.yaml
+  OK    File present: .github/workflows/ci-cd.yml
+  OK    run.sh syntax is valid
+  OK    Command available: docker
+  OK    Command available: curl
+  OK    Command available: git
+  OK    Optional command available: node
+  OK    Optional command available: kubectl
+  OK    Optional command available: gh
+  WARN  Optional command not installed: shellcheck
+  OK    Docker daemon reachable
+  OK    docker-compose.yml is valid
+  OK    Port 5000: served by this project
+  OK    Kubernetes cluster reachable (context 'minikube')
+------------------------------------------------------------
+  18 ok, 1 warnings, 0 failures   (log: /data/DevOps-Task-Manager/logs/launcher.log)
+  RESULT: CHECK PASSED
+------------------------------------------------------------
+===== PROJECT STATUS =====
+
+------------------------------------------------------------
+STATUS
+------------------------------------------------------------
+NAME                          IMAGE                     COMMAND                  SERVICE   CREATED              STATUS                        PORTS
+devops-task-manager-api-1     devops-task-manager:1.0   "docker-entrypoint.s…"   api       About a minute ago   Up About a minute (healthy)   0.0.0.0:5000->5000/tcp, [::]:5000->5000/tcp
+devops-task-manager-mongo-1   mongo:7                   "docker-entrypoint.s…"   mongo     5 minutes ago        Up About a minute (healthy)   27017/tcp
+OK    API healthy on port 5000, database connected
+
+  Web UI : http://localhost:5000
+  API    : http://localhost:5000/api
+  Health : http://localhost:5000/health
+  MongoDB: mongodb://mongo:27017/devops_tasks (internal network only)
+
+------------------------------------------------------------
+SUMMARY
+------------------------------------------------------------
+  OK    API healthy on port 5000, database connected
+------------------------------------------------------------
+  1 ok, 0 warnings, 0 failures   (log: /data/DevOps-Task-Manager/logs/launcher.log)
+  RESULT: RUNNING
+------------------------------------------------------------
+===== API HEALTH =====
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100    70  100    70    0     0  51622      0 --:--:-- --:--:-- --:--:-- 70000
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Content-Length: 70
+ETag: W/"46-Srz2mz+kpHLPnqOiMUCpZ0ecBP0"
+Date: Thu, 15 Oct 2026 20:25:34 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+{"status":"ok","service":"devops-task-manager","database":"connected"}===== API TASKS =====
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100     2  100     2    0     0    649      0 --:--:-- --:--:-- --:--:--  1000
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Content-Length: 2
+ETag: W/"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w"
+Date: Thu, 15 Oct 2026 20:25:34 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+[]===== MONGODB =====
+{ ok: 1 }
+===== TESTS =====
+
+> devops-task-manager@1.0.0 test
+> jest --runInBand --verbose
+
+sh: 1: jest: not found
+===== MINIKUBE =====
+minikube
+type: Control Plane
+host: Running
+kubelet: Running
+apiserver: Running
+kubeconfig: Configured
+
+===== KUBERNETES CONTEXT =====
+CURRENT   NAME             CLUSTER          AUTHINFO         NAMESPACE
+          docker-desktop   docker-desktop   docker-desktop   
+*         minikube         minikube         minikube         default
+Kubernetes control plane is running at https://192.168.49.2:8443
+CoreDNS is running at https://192.168.49.2:8443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+
+To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
+NAME       STATUS   ROLES           AGE    VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE                         KERNEL-VERSION                    CONTAINER-RUNTIME
+minikube   Ready    control-plane   147m   v1.37.0   192.168.49.2   <none>        Debian GNU/Linux 12 (bookworm)   6.17.9-76061709-generic (amd64)   containerd://2.3.4
+===== KUBERNETES RESOURCES =====
+No resources found in devops-task-manager namespace.
+No resources found in devops-task-manager namespace.
+No resources found in devops-task-manager namespace.
+===== GITHUB ACTIONS =====
+completed	success	Updated UI	DevOps Task Manager CI/CD	main	push	38771974140	3m1s	3h
+completed	success	Fixed Bugs	DevOps Task Manager CI/CD	main	push	38769973202	3m10s	3h
+completed	failure	Added Terminal in the UI	DevOps Task Manager CI/CD	main	push	36554537982	1m5s	16d
+completed	failure	Added UI	DevOps Task Manager CI/CD	main	push	36554256633	1m24s	16d
+completed	failure	Initial Commit	DevOps Task Manager CI/CD	main	push	36551112291	56s	16d
+===== LAUNCHER LOG =====
+2026-10-16 01:45:27 OK    Log/run directories writable (/data/DevOps-Task-Manager/logs, /data/DevOps-Task-Manager/.run)
+2026-10-16 01:45:27 OK    Config OK: PORT=5000 (from default), MONGO_URI set (from default, target localhost:27017), .env not present - using defaults
+2026-10-16 01:45:27 WARN  .env not found: built-in defaults are used. Optional: cp .env.example .env
+2026-10-16 01:45:27 OK    Port 5000: a healthy instance of this app is already running
+2026-10-16 01:45:27 OK    MongoDB reachable and answering
+2026-10-16 01:45:27 OK    All checks passed - ready to start.
+2026-10-16 01:45:57 OK    Application health check passed.
+2026-10-16 01:45:57 WARN  Docker daemon is not reachable. Start Docker and retry.
+2026-10-16 01:45:57 WARN  Kubernetes API is not responding; check cluster status.
+2026-10-16 01:45:57 WARN  There are uncommitted or untracked changes; review before pushing.
+2026-10-16 01:45:58 OK    GitHub CLI is authenticated.
+2026-10-16 01:45:59 WARN  One or more DevOps components are missing, unavailable, or need attention. See WARN lines above.
+2026-10-16 01:47:24 OK    File present: Dockerfile
+2026-10-16 01:47:24 OK    File present: docker-compose.yml
+2026-10-16 01:47:24 OK    File present: docker-compose.dev.yml
+2026-10-16 01:47:24 OK    File present: package.json
+2026-10-16 01:47:24 OK    File present: src/server.js
+2026-10-16 01:47:24 OK    File present: k8s/namespace.yaml
+2026-10-16 01:47:24 OK    File present: .github/workflows/ci-cd.yml
+2026-10-16 01:47:24 OK    run.sh syntax is valid
+2026-10-16 01:47:24 OK    Command available: docker
+2026-10-16 01:47:24 OK    Command available: curl
+2026-10-16 01:47:24 OK    Command available: git
+2026-10-16 01:47:24 OK    Optional command available: node
+2026-10-16 01:47:24 OK    Optional command available: kubectl
+2026-10-16 01:47:24 OK    Optional command available: gh
+2026-10-16 01:47:24 WARN  Optional command not installed: shellcheck
+2026-10-16 01:47:25 ERROR Docker daemon is not reachable (start Docker)
+2026-10-16 01:47:25 WARN  No reachable Kubernetes cluster (only needed for: deploy k8s)
+2026-10-16 01:47:25 ERROR Docker daemon is not reachable.
+2026-10-16 01:47:25 ERROR Cluster for context 'docker-desktop' is not reachable.
+2026-10-16 01:48:31 ERROR Docker daemon is not reachable.
+2026-10-16 01:48:51 OK    File present: Dockerfile
+2026-10-16 01:48:51 OK    File present: docker-compose.yml
+2026-10-16 01:48:51 OK    File present: docker-compose.dev.yml
+2026-10-16 01:48:51 OK    File present: package.json
+2026-10-16 01:48:51 OK    File present: src/server.js
+2026-10-16 01:48:51 OK    File present: k8s/namespace.yaml
+2026-10-16 01:48:51 OK    File present: .github/workflows/ci-cd.yml
+2026-10-16 01:48:51 OK    run.sh syntax is valid
+2026-10-16 01:48:51 OK    Command available: docker
+2026-10-16 01:48:51 OK    Command available: curl
+2026-10-16 01:48:51 OK    Command available: git
+2026-10-16 01:48:51 OK    Optional command available: node
+2026-10-16 01:48:51 OK    Optional command available: kubectl
+2026-10-16 01:48:51 OK    Optional command available: gh
+2026-10-16 01:48:51 WARN  Optional command not installed: shellcheck
+2026-10-16 01:48:51 ERROR Docker daemon is not reachable (start Docker)
+2026-10-16 01:48:51 WARN  No reachable Kubernetes cluster (only needed for: deploy k8s)
+2026-10-16 01:48:51 ERROR Docker daemon is not reachable.
+2026-10-16 01:48:51 ERROR Cluster for context 'docker-desktop' is not reachable.
+2026-10-16 01:49:00 ERROR Docker daemon is not reachable.
+2026-10-16 01:50:18 OK    File present: Dockerfile
+2026-10-16 01:50:18 OK    File present: docker-compose.yml
+2026-10-16 01:50:18 OK    File present: docker-compose.dev.yml
+2026-10-16 01:50:18 OK    File present: package.json
+2026-10-16 01:50:18 OK    File present: src/server.js
+2026-10-16 01:50:18 OK    File present: k8s/namespace.yaml
+2026-10-16 01:50:18 OK    File present: .github/workflows/ci-cd.yml
+2026-10-16 01:50:18 OK    run.sh syntax is valid
+2026-10-16 01:50:18 OK    Command available: docker
+2026-10-16 01:50:18 OK    Command available: curl
+2026-10-16 01:50:18 OK    Command available: git
+2026-10-16 01:50:18 OK    Optional command available: node
+2026-10-16 01:50:18 OK    Optional command available: kubectl
+2026-10-16 01:50:18 OK    Optional command available: gh
+2026-10-16 01:50:18 WARN  Optional command not installed: shellcheck
+2026-10-16 01:50:18 OK    Docker daemon reachable
+2026-10-16 01:50:18 OK    docker-compose.yml is valid
+2026-10-16 01:50:18 OK    Port 5000: served by this project
+2026-10-16 01:50:19 WARN  No reachable Kubernetes cluster (only needed for: deploy k8s)
+2026-10-16 01:50:19 OK    Docker daemon and Compose are usable; docker-compose.yml is valid
+2026-10-16 01:50:19 OK    Host port 5000 is already served by this project's API (re-use)
+2026-10-16 01:50:19 INFO  MongoDB is not published on the host (internal network only) - no 27017 conflict possible
+2026-10-16 01:50:19 WARN  Found another MongoDB volume 'devops_task_manager_mongo_data' (older run?). It is NOT used and NOT modified.
+2026-10-16 01:50:19 INFO  Building image and starting containers (timeout 600s; log: /data/DevOps-Task-Manager/logs/compose-up.log)...
+2026-10-16 01:50:27 OK    Containers created/updated
+2026-10-16 01:50:27 INFO  Waiting up to 120s for MongoDB and the API to become healthy...
+2026-10-16 01:50:28 OK    MongoDB is healthy and the API reports database=connected
+2026-10-16 01:50:29 OK    Docker: API container running
+2026-10-16 01:50:29 OK    Docker: MongoDB container running (healthy)
+2026-10-16 01:50:29 OK    API /health: database connected (port 5000)
+2026-10-16 01:50:29 OK    GET /api/tasks -> 200 (database query works)
+2026-10-16 01:50:29 OK    Write smoke test: created and deleted its own task
+2026-10-16 01:50:29 WARN  Kubernetes: no reachable cluster (skipped)
+2026-10-16 01:50:29 OK    Git: origin = https://github.com/Arman-6/DevOps-Task-Manager.git
+2026-10-16 01:50:29 WARN  Git: uncommitted changes (workflow runs only on pushed commits)
+2026-10-16 01:50:31 OK    GitHub Actions: DevOps Task Manager CI/CD on main: completed success
+2026-10-16 01:50:31 OK    Docker daemon and Compose are usable; docker-compose.yml is valid
+2026-10-16 01:50:31 OK    Host port 5001 is already served by this project's API (re-use)
+2026-10-16 01:50:31 INFO  MongoDB is not published on the host (internal network only) - no 27017 conflict possible
+2026-10-16 01:50:31 WARN  Found another MongoDB volume 'devops_task_manager_mongo_data' (older run?). It is NOT used and NOT modified.
+2026-10-16 01:50:31 INFO  Building image and starting containers (timeout 600s; log: /data/DevOps-Task-Manager/logs/compose-up.log)...
+2026-10-16 01:50:32 OK    Containers created/updated
+2026-10-16 01:50:32 INFO  Waiting up to 120s for MongoDB and the API to become healthy...
+2026-10-16 01:50:34 OK    MongoDB is healthy and the API reports database=connected
+2026-10-16 01:50:34 ERROR Cluster for context 'docker-desktop' is not reachable.
+2026-10-16 01:51:06 INFO  Stopping containers (kept, with their data)...
+ Container devops-task-manager-api-1 Stopping 
+ Container devops-task-manager-api-1 Stopped 
+ Container devops-task-manager-mongo-1 Stopping 
+ Container devops-task-manager-mongo-1 Stopped 
+2026-10-16 01:51:07 OK    Containers stopped; data kept
+2026-10-16 01:53:18 OK    File present: Dockerfile
+2026-10-16 01:53:18 OK    File present: docker-compose.yml
+2026-10-16 01:53:18 OK    File present: docker-compose.dev.yml
+2026-10-16 01:53:18 OK    File present: package.json
+2026-10-16 01:53:18 OK    File present: src/server.js
+2026-10-16 01:53:18 OK    File present: k8s/namespace.yaml
+2026-10-16 01:53:18 OK    File present: .github/workflows/ci-cd.yml
+2026-10-16 01:53:18 OK    run.sh syntax is valid
+2026-10-16 01:53:18 OK    Command available: docker
+2026-10-16 01:53:18 OK    Command available: curl
+2026-10-16 01:53:18 OK    Command available: git
+2026-10-16 01:53:18 OK    Optional command available: node
+2026-10-16 01:53:18 OK    Optional command available: kubectl
+2026-10-16 01:53:18 OK    Optional command available: gh
+2026-10-16 01:53:18 WARN  Optional command not installed: shellcheck
+2026-10-16 01:53:18 OK    Docker daemon reachable
+2026-10-16 01:53:18 OK    docker-compose.yml is valid
+2026-10-16 01:53:18 OK    Port 5000 is free
+2026-10-16 01:53:18 OK    Kubernetes cluster reachable (context 'minikube')
+2026-10-16 01:53:18 ERROR API container does not exist (not started)
+2026-10-16 01:53:19 ERROR Docker: API container is 'missing' - stack is not deployed/running
+2026-10-16 01:53:19 WARN  Kubernetes: namespace devops-task-manager not deployed on 'minikube' (run: ./run.sh deploy k8s) (skipped)
+2026-10-16 01:53:19 OK    Git: origin = https://github.com/Arman-6/DevOps-Task-Manager.git
+2026-10-16 01:53:19 WARN  Git: uncommitted changes (workflow runs only on pushed commits)
+2026-10-16 01:53:20 OK    GitHub Actions: DevOps Task Manager CI/CD on main: completed success
+2026-10-16 01:53:36 OK    Docker daemon and Compose are usable; docker-compose.yml is valid
+2026-10-16 01:53:36 OK    Host port 5000 is free
+2026-10-16 01:53:36 INFO  MongoDB is not published on the host (internal network only) - no 27017 conflict possible
+2026-10-16 01:53:36 WARN  Found another MongoDB volume 'devops_task_manager_mongo_data' (older run?). It is NOT used and NOT modified.
+2026-10-16 01:53:36 INFO  Building image and starting containers (timeout 600s; log: /data/DevOps-Task-Manager/logs/compose-up.log)...
+2026-10-16 01:53:43 OK    Containers created/updated
+2026-10-16 01:53:43 INFO  Waiting up to 120s for MongoDB and the API to become healthy...
+2026-10-16 01:53:44 OK    MongoDB is healthy and the API reports database=connected
+2026-10-16 01:55:26 OK    File present: Dockerfile
+2026-10-16 01:55:26 OK    File present: docker-compose.yml
+2026-10-16 01:55:26 OK    File present: docker-compose.dev.yml
+2026-10-16 01:55:26 OK    File present: package.json
+2026-10-16 01:55:26 OK    File present: src/server.js
+2026-10-16 01:55:26 OK    File present: k8s/namespace.yaml
+2026-10-16 01:55:26 OK    File present: .github/workflows/ci-cd.yml
+2026-10-16 01:55:26 OK    run.sh syntax is valid
+2026-10-16 01:55:26 OK    Command available: docker
+2026-10-16 01:55:26 OK    Command available: curl
+2026-10-16 01:55:26 OK    Command available: git
+2026-10-16 01:55:26 OK    Optional command available: node
+2026-10-16 01:55:26 OK    Optional command available: kubectl
+2026-10-16 01:55:26 OK    Optional command available: gh
+2026-10-16 01:55:26 WARN  Optional command not installed: shellcheck
+2026-10-16 01:55:26 OK    Docker daemon reachable
+2026-10-16 01:55:26 OK    docker-compose.yml is valid
+2026-10-16 01:55:26 OK    Port 5000: served by this project
+2026-10-16 01:55:26 OK    Kubernetes cluster reachable (context 'minikube')
+2026-10-16 01:55:26 OK    API healthy on port 5000, database connected
+2026-10-16 01:55:33 OK    File present: Dockerfile
+2026-10-16 01:55:33 OK    File present: docker-compose.yml
+2026-10-16 01:55:33 OK    File present: docker-compose.dev.yml
+2026-10-16 01:55:33 OK    File present: package.json
+2026-10-16 01:55:33 OK    File present: src/server.js
+2026-10-16 01:55:33 OK    File present: k8s/namespace.yaml
+2026-10-16 01:55:33 OK    File present: .github/workflows/ci-cd.yml
+2026-10-16 01:55:33 OK    run.sh syntax is valid
+2026-10-16 01:55:33 OK    Command available: docker
+2026-10-16 01:55:33 OK    Command available: curl
+2026-10-16 01:55:33 OK    Command available: git
+2026-10-16 01:55:33 OK    Optional command available: node
+2026-10-16 01:55:33 OK    Optional command available: kubectl
+2026-10-16 01:55:33 OK    Optional command available: gh
+2026-10-16 01:55:33 WARN  Optional command not installed: shellcheck
+2026-10-16 01:55:33 OK    Docker daemon reachable
+2026-10-16 01:55:34 OK    docker-compose.yml is valid
+2026-10-16 01:55:34 OK    Port 5000: served by this project
+2026-10-16 01:55:34 OK    Kubernetes cluster reachable (context 'minikube')
+2026-10-16 01:55:34 OK    API healthy on port 5000, database connected

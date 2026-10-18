@@ -1,0 +1,89 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: task-manager-api
+  namespace: devops-task-manager
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: task-manager-api
+  revisionHistoryLimit: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: task-manager-api
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000   # "node" user of the node:alpine image
+      containers:
+        - name: api
+          image: devops-task-manager:1.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5000
+          env:
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: task-manager-config
+                  key: PORT
+            - name: MONGO_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: task-manager-secret
+                  key: MONGO_USERNAME
+            - name: MONGO_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: task-manager-secret
+                  key: MONGO_PASSWORD
+            - name: MONGO_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: task-manager-config
+                  key: MONGO_HOST
+            - name: MONGO_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: task-manager-config
+                  key: MONGO_PORT
+            - name: MONGO_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: task-manager-config
+                  key: MONGO_DATABASE
+            # $(VAR) is expanded by Kubernetes from the variables defined above
+            - name: MONGO_URI
+              value: "mongodb://$(MONGO_USERNAME):$(MONGO_PASSWORD)@$(MONGO_HOST):$(MONGO_PORT)/$(MONGO_DATABASE)?authSource=admin"
+          # The API only starts listening after it reached MongoDB (up to ~80 s of
+          # retries), so liveness must not run before startup has finished.
+          startupProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            periodSeconds: 5
+            failureThreshold: 30
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"

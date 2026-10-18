@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DevOps Task Manager</title>
+<style>
+:root{
+  --bg:#0a0a0a;--card:#111111;--card-2:#161616;--line:#262626;--line-2:#333;
+  --ink:#ededed;--muted:#8b8b8b;--dim:#5f5f5f;
+  --green:#3ecf8e;--blue:#5b9dff;--amber:#f5a623;--red:#ff5d5d;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  --r:4px;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+::selection{background:#fff;color:#000}
+
+/* ---------- 3 column layout ---------- */
+.layout{max-width:1560px;margin:auto;padding:28px 22px;display:grid;grid-template-columns:300px minmax(0,1fr) 300px;gap:24px;align-items:start}
+.side{position:sticky;top:20px;display:flex;flex-direction:column;gap:12px;max-height:calc(100vh - 40px);overflow-y:auto;padding-right:2px}
+.side::-webkit-scrollbar,.terminal::-webkit-scrollbar{width:6px}
+.side::-webkit-scrollbar-thumb,.terminal::-webkit-scrollbar-thumb{background:#2c2c2c}
+.main{min-width:0}
+
+/* ---------- header ---------- */
+header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:22px;gap:12px;flex-wrap:wrap;padding-bottom:18px;border-bottom:1px solid var(--line)}
+h1{margin:0;font-size:26px;font-weight:600;letter-spacing:-.3px;color:#fff}
+.sub{color:var(--muted);margin-top:6px;font-family:var(--mono);font-size:12px}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border:1px solid var(--line-2);border-radius:var(--r);background:var(--card);color:var(--green);font:12px var(--mono)}
+.badge::before{content:"";width:7px;height:7px;background:currentColor;border-radius:50%}
+.badge.off{color:var(--red)}
+
+/* ---------- stats ---------- */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-bottom:18px;border:1px solid var(--line);border-radius:var(--r);background:var(--card)}
+.stat{padding:14px 16px;border-right:1px solid var(--line)}
+.stat:last-child{border-right:0}
+.stat b{display:block;font-size:26px;font-weight:600;line-height:1.1;font-variant-numeric:tabular-nums}
+.stat span{font:11px var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.6px}
+
+/* ---------- cards ---------- */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px;margin-bottom:18px}
+.card h2{margin:0;font-size:16px;font-weight:600;color:#fff}
+.card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.hint{font-size:12.5px;color:var(--muted);margin-top:4px}
+.flow{font:11px var(--mono);color:var(--muted);border:1px solid var(--line);padding:4px 8px;border-radius:2px;white-space:nowrap}
+
+.form{display:grid;grid-template-columns:1fr 2fr 130px auto;gap:10px}
+.form input,.form select,.form button,.filters select,.actions select{font:inherit;color:var(--ink);background:#0a0a0a;border:1px solid var(--line-2);border-radius:var(--r)}
+.form input,.form select,.form button{padding:11px 12px}
+.form input::placeholder{color:var(--dim)}
+.form input:focus,.form select:focus,.filters select:focus,.actions select:focus{outline:0;border-color:#fff}
+.form button{background:#fff;color:#000;border-color:#fff;cursor:pointer;padding:11px 22px;font-weight:600}
+.form button:hover{background:#d4d4d4;border-color:#d4d4d4}
+
+.filters{display:flex;gap:10px;margin-bottom:6px}
+.filters select{padding:8px 10px;font-size:13px}
+
+.task{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--line);gap:12px}
+.task:last-child{border-bottom:0;padding-bottom:0}
+.task strong{display:block;font-weight:500;color:#fff}
+.task small{color:var(--muted)}
+.delete{border:1px solid var(--line-2);background:transparent;color:var(--red);padding:7px 12px;border-radius:var(--r);cursor:pointer;font:inherit;font-size:13px}
+.delete:hover{border-color:var(--red);background:rgba(255,93,93,.08)}
+.empty{text-align:center;color:var(--dim);padding:28px;font-family:var(--mono);font-size:13px}
+.pill{display:inline-block;padding:2px 8px;border:1px solid var(--line-2);border-radius:2px;font:11px var(--mono);margin-right:6px;color:var(--muted)}
+.pill.high{color:var(--red);border-color:rgba(255,93,93,.4)}
+.pill.medium{color:var(--amber);border-color:rgba(245,166,35,.4)}
+.pill.low{color:var(--green);border-color:rgba(62,207,142,.4)}
+.pill.completed{color:var(--green);border-color:rgba(62,207,142,.4)}
+.pill.in-progress{color:var(--blue);border-color:rgba(91,157,255,.4)}
+.actions{display:flex;gap:8px;align-items:center}
+.actions select{padding:7px;font-size:13px}
+.done strong{text-decoration:line-through;color:var(--dim)}
+
+/* ---------- side info panels (for evaluator) ---------- */
+.panel-tag{display:block;font:11px var(--mono);letter-spacing:.8px;text-transform:uppercase;color:var(--muted);padding:2px 0 6px;border-bottom:1px solid var(--line)}
+.info{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px 15px}
+.info h3{margin:0 0 4px;font-size:13.5px;font-weight:600;color:#fff;display:flex;align-items:baseline;gap:8px}
+.info h3 small{font:11px var(--mono);color:var(--dim);font-weight:400}
+.info p{margin:6px 0 0;font-size:12.5px;line-height:1.55;color:#a3a3a3}
+.info ul{margin:9px 0 0;padding:0;list-style:none;font-size:12.5px;color:#a3a3a3;display:flex;flex-direction:column;gap:6px}
+.info li{padding-left:14px;position:relative;line-height:1.45}
+.info li::before{content:"–";position:absolute;left:0;color:var(--dim)}
+.info b{color:#d4d4d4;font-weight:500}
+code{font:11.5px var(--mono);background:#1c1c1c;color:#d4d4d4;padding:1px 5px;border-radius:2px;border:1px solid #262626}
+
+.arch{display:flex;flex-direction:column;margin-top:10px}
+.node{border:1px solid var(--line-2);border-radius:var(--r);padding:8px 10px;font-size:12px;text-align:center;background:var(--card-2)}
+.node b{display:block;font-size:12.5px;color:#fff}
+.node span{color:var(--muted);font:11px var(--mono)}
+.arrow{text-align:center;color:var(--dim);font:11px var(--mono);line-height:1.9}
+
+.api-table{width:100%;border-collapse:collapse;margin-top:8px;font-size:12px}
+.api-table td{padding:6px 0;border-bottom:1px solid var(--line)}
+.api-table tr:last-child td{border-bottom:0}
+.m{display:inline-block;min-width:44px;font:600 10.5px var(--mono);margin-right:8px}
+.m.get{color:var(--green)}.m.post{color:var(--blue)}.m.put{color:var(--amber)}.m.del{color:var(--red)}
+
+/* ---------- DevOps terminal ---------- */
+.terminal-card{background:#000;border:1px solid var(--line-2);border-radius:var(--r);padding:0;overflow:hidden;margin-top:18px}
+.terminal-head{height:40px;padding:0 14px;display:flex;align-items:center;position:relative;background:#141414;border-bottom:1px solid var(--line)}
+.terminal-buttons{display:flex;gap:7px}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block;background:#3a3a3a}
+.terminal-title{position:absolute;left:50%;transform:translateX(-50%);color:var(--muted);font:12px var(--mono)}
+.live{margin-left:auto;font:10px var(--mono);color:var(--green);letter-spacing:.5px}
+.terminal-note{padding:8px 16px;background:#0d0d0d;color:var(--muted);font-size:11.5px;border-bottom:1px solid var(--line)}
+.terminal{height:255px;overflow-y:auto;overflow-x:hidden;padding:15px 17px 18px;background:#000;color:#cfcfcf;font:12px/1.65 var(--mono);white-space:normal;overflow-wrap:anywhere;word-break:break-word}
+.terminal>div{max-width:100%;overflow-wrap:anywhere;word-break:break-word;margin:1px 0}
+.terminal .prompt{color:var(--green);font-weight:700;margin-right:7px}
+.terminal .cmd{color:#7dd3fc}.terminal .req{color:#d4d4d4}.terminal .ok{color:var(--green)}.terminal .err{color:var(--red)}.terminal .muted{color:#6b6b6b}
+
+footer{text-align:center;color:var(--dim);font:11px var(--mono);margin-top:6px}
+
+/* ---------- pipeline timeline ---------- */
+.timeline-card{margin-top:18px}
+.tl-scroll{overflow-x:auto;padding-bottom:4px}
+.tl{min-width:640px;display:flex;flex-direction:column;gap:10px;margin-top:6px}
+.tl-row{display:grid;grid-template-columns:repeat(6,1fr)}
+.tl-top{min-height:58px;align-items:end}
+.tl-label{text-align:center;font:11px/1.4 var(--mono);color:var(--dim);display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:5px}
+.tl-label b{font-weight:600;color:var(--muted)}
+.tl-label.on b{color:var(--blue)}
+.tl-label .stem{width:1px;height:14px;background:var(--line-2)}
+.tl-label.on .stem{background:var(--blue)}
+.tl-label.interval{grid-column:2 / 5;border-bottom:0}
+.tl-label.interval .bar{align-self:stretch;margin:0 calc(100% / 6 - 15px);height:6px;border:1px solid var(--line-2);border-bottom:0}
+.tl-label.interval.on .bar{border-color:var(--blue)}
+.tl-nodes{position:relative}
+.tl-nodes::before,.tl-nodes::after{content:"";position:absolute;top:50%;left:calc(100% / 12);height:2px;transform:translateY(-1px);transition:width .8s ease}
+.tl-nodes::before{width:calc(100% * 5 / 6);background:var(--line-2)}
+.tl-nodes::after{width:calc(100% * 5 / 6 * var(--p,0));background:var(--blue)}
+.tl-node{transition:background .4s,color .4s;position:relative;z-index:1;justify-self:center;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font:600 12px var(--mono);background:#2a2a2a;color:#9a9a9a;border:2px solid var(--bg)}
+.tl-node.done{background:var(--blue);color:#000}
+.tl-node.running{background:#1c1c1c;color:var(--blue);box-shadow:0 0 0 2px var(--blue);animation:tlpulse 1s infinite}
+@keyframes tlpulse{50%{box-shadow:0 0 0 5px rgba(91,157,255,.25)}}
+.tl-name.on{color:#fff}
+.tl-replay{font:11px var(--mono);color:var(--ink);background:transparent;border:1px solid var(--line-2);border-radius:2px;padding:4px 10px;cursor:pointer}
+.tl-replay:hover{border-color:#fff}
+.tl-label{transition:opacity .3s}
+.tl-name{text-align:center;font-size:12px;color:#d4d4d4;line-height:1.4}
+.tl-name small{display:block;font:11px var(--mono);color:var(--dim);margin-top:2px}
+.tl-legend{display:flex;gap:18px;flex-wrap:wrap;margin-top:16px;padding-top:12px;border-top:1px solid var(--line);font:11px var(--mono);color:var(--muted)}
+.tl-legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;background:#2a2a2a}
+.tl-legend i.d{background:var(--blue)}
+
+/* ---------- responsive ---------- */
+@media(max-width:1280px){.layout{grid-template-columns:260px minmax(0,1fr) 260px;gap:16px;padding:20px 14px}}
+@media(max-width:1060px){
+  .layout{grid-template-columns:1fr}
+  .side{position:static;max-height:none;overflow:visible;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+  .side .panel-tag,.side>div:first-child{grid-column:1/-1}
+  .main{order:-1}
+}
+@media(max-width:700px){
+  .form{grid-template-columns:1fr}.task{flex-direction:column;align-items:flex-start}
+  .stats{grid-template-columns:repeat(2,1fr)}.stat:nth-child(2){border-right:0}.stat:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .terminal{height:230px;font-size:11px;padding:12px}.terminal-title{display:none}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+
+  <!-- ================= LEFT: DevOps tools explanation (for evaluator) ================= -->
+  <aside class="side" aria-label="DevOps explanation">
+    <div><span class="panel-tag">For evaluator / DevOps</span></div>
+
+    <div class="info docker">
+      <h3>Docker <small>Exp 5</small></h3>
+      <p>Packages the app and database into containers so it runs the same on any machine.</p>
+      <ul>
+        <li><code>Dockerfile</code> – builds the API image (node:20-alpine, non-root user, HEALTHCHECK)</li>
+        <li><code>docker-compose.yml</code> – starts <b>api</b> + <b>mongo</b> together on one network</li>
+        <li>Volume <code>mongo_data</code> keeps tasks after restart</li>
+        <li>Run: <code>docker compose up --build</code></li>
+      </ul>
+    </div>
+
+    <div class="info k8s">
+      <h3>Kubernetes <small>Exp 7</small></h3>
+      <p>Runs and manages the containers on a cluster – restarts them if they crash.</p>
+      <ul>
+        <li><code>namespace.yaml</code> – isolated space for the project</li>
+        <li><code>configmap.yaml</code> / <code>secret.yaml</code> – settings &amp; credentials</li>
+        <li><code>mongo-pvc.yaml</code> – persistent storage for the DB</li>
+        <li><code>*-deployment.yaml</code> – how many pods to run</li>
+        <li><code>*-service.yaml</code> – stable network address for each pod</li>
+      </ul>
+    </div>
+
+    <div class="info ci">
+      <h3>GitHub Actions CI/CD <small>Exp 8</small></h3>
+      <p>Runs automatically on every push to <code>main</code> (<code>.github/workflows/ci-cd.yml</code>):</p>
+      <ul>
+        <li><b>1. Test</b> – <code>npm test</code></li>
+        <li><b>2. Docker build</b> – builds the image</li>
+        <li><b>3. Kubernetes test</b> – deploys to a temporary <code>kind</code> cluster + smoke test</li>
+        <li><b>4. Publish</b> – pushes image to GitHub Container Registry</li>
+      </ul>
+    </div>
+  </aside>
+
+  <!-- ================= CENTER: the application ================= -->
+  <main class="main">
+    <header>
+      <div>
+        <h1>DevOps Task Manager</h1>
+        <div class="sub">Docker • Kubernetes • CI/CD</div>
+      </div>
+      <span class="badge" id="status">Checking API…</span>
+    </header>
+
+    <div class="stats">
+      <div class="stat"><b id="sTotal">0</b><span>Total</span></div>
+      <div class="stat"><b id="sPending">0</b><span>Pending</span></div>
+      <div class="stat"><b id="sProgress">0</b><span>In progress</span></div>
+      <div class="stat"><b id="sDone">0</b><span>Completed</span></div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div><h2>Add Task</h2><div class="hint">Creates a new task and saves it in MongoDB</div></div>
+        <span class="flow">browser → POST /api/tasks → MongoDB</span>
+      </div>
+      <div class="form">
+        <input id="title" placeholder="Task title">
+        <input id="description" placeholder="Description">
+        <select id="priority"><option value="low">Low</option><option value="medium" selected>Medium</option><option value="high">High</option></select>
+        <button onclick="addTask()">Add Task</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <div><h2>Tasks</h2><div class="hint">Filter, change status or delete – every action calls the REST API</div></div>
+        <span class="flow">GET · PUT · DELETE /api/tasks</span>
+      </div>
+      <div class="filters">
+        <select id="filterStatus" onchange="loadTasks()"><option value="">All statuses</option><option value="pending">Pending</option><option value="in-progress">In progress</option><option value="completed">Completed</option></select>
+        <select id="filterPriority" onchange="loadTasks()"><option value="">All priorities</option><option value="high">High</option><option value="medium">Medium</option><option value="low">Low</option></select>
+      </div>
+      <div id="tasks"><div class="empty">Loading…</div></div>
+    </div>
+
+    <div class="card terminal-card">
+      <div class="terminal-head">
+        <div class="terminal-buttons"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+        <div class="terminal-title">DevOps Activity — zsh</div>
+        <span class="live">● LIVE</span>
+      </div>
+      <div class="terminal-note">Live log of every request the browser sends to the API, with status code and response time.</div>
+      <div id="terminal" class="terminal">
+        <div><span class="prompt">$</span> <span class="cmd">system</span> Initializing DevOps Task Manager...</div>
+        <div><span class="prompt">$</span> <span class="cmd">docker</span> API container connected</div>
+        <div><span class="prompt">$</span> <span class="cmd">mongodb</span> Database connection ready</div>
+        <div class="muted">Waiting for activity...</div>
+      </div>
+    </div>
+    <div class="card timeline-card">
+      <div class="card-head">
+        <div><h2>Pipeline Timeline</h2><div class="hint">Path of a code change from commit to a running cluster</div></div>
+        <span style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span class="flow">.github/workflows/ci-cd.yml</span><button class="tl-replay" id="tlReplay" onclick="runPipeline()">Replay</button></span>
+      </div>
+      <div class="tl-scroll"><div class="tl">
+        <div class="tl-row tl-top">
+          <div class="tl-label" data-at="0"><b>Milestone</b>Push to main<span class="stem"></span></div>
+          <div class="tl-label interval" data-at="1"><b>Interval</b>GitHub Actions jobs run automatically<span class="bar" style="width:auto"></span></div>
+          <div class="tl-label" data-at="4"><b>Milestone</b>Image on GHCR<span class="stem"></span></div>
+          <div class="tl-label"><b>Milestone</b>Live on K8s<span class="stem"></span></div>
+        </div>
+        <div class="tl-row tl-nodes" id="tlNodes" style="--p:0">
+          <div class="tl-node">1</div><div class="tl-node">2</div><div class="tl-node">3</div>
+          <div class="tl-node">4</div><div class="tl-node">5</div><div class="tl-node">6</div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-name">Commit<small>git push</small></div>
+          <div class="tl-name">Test<small>npm test</small></div>
+          <div class="tl-name">Docker build<small>docker build</small></div>
+          <div class="tl-name">K8s smoke test<small>kind cluster</small></div>
+          <div class="tl-name">Publish<small>ghcr.io</small></div>
+          <div class="tl-name">Deploy<small>deploy-k8s.bat</small></div>
+        </div>
+      </div></div>
+      <div class="tl-legend"><span><i class="d"></i>Automated by GitHub Actions</span><span><i></i>Manual step on your own cluster</span></div>
+    </div>
+    <footer>DevOps Task Manager · Node.js + Express + MongoDB</footer>
+  </main>
+
+  <!-- ================= RIGHT: application architecture (for evaluator) ================= -->
+  <aside class="side" aria-label="Application explanation">
+    <div><span class="panel-tag">For evaluator / Application</span></div>
+
+    <div class="info ui">
+      <h3>What each part of this page does</h3>
+      <ul>
+        <li><b>Status badge</b> – calls <code>GET /health</code> to show if the API is alive</li>
+        <li><b>Stat cards</b> – live count of tasks by status</li>
+        <li><b>Add Task</b> – form that creates a task</li>
+        <li><b>Tasks list</b> – read, update status, delete</li>
+        <li><b>Terminal</b> – shows the API traffic in real time</li>
+      </ul>
+    </div>
+
+    <div class="info app">
+      <h3>Architecture</h3>
+      <div class="arch">
+        <div class="node"><b>Frontend</b><span>public/index.html</span></div>
+        <div class="arrow">HTTP / JSON ↓</div>
+        <div class="node"><b>Express API</b><span>Node.js · port 5000</span></div>
+        <div class="arrow">Mongoose ↓</div>
+        <div class="node"><b>MongoDB</b><span>devops_tasks database</span></div>
+      </div>
+    </div>
+
+    <div class="info api">
+      <h3>REST API endpoints</h3>
+      <table class="api-table">
+        <tr><td><span class="m get">GET</span><code>/health</code></td></tr>
+        <tr><td><span class="m get">GET</span><code>/api/tasks</code></td></tr>
+        <tr><td><span class="m post">POST</span><code>/api/tasks</code></td></tr>
+        <tr><td><span class="m put">PUT</span><code>/api/tasks/:id</code></td></tr>
+        <tr><td><span class="m del">DEL</span><code>/api/tasks/:id</code></td></tr>
+      </table>
+      <p>Routes in <code>src/routes</code>, logic in <code>src/controllers</code>.</p>
+    </div>
+
+    <div class="info db">
+      <h3>Data model (Task)</h3>
+      <ul>
+        <li><code>title</code> – required, 2–120 chars</li>
+        <li><code>description</code> – optional, max 500</li>
+        <li><code>status</code> – pending / in-progress / completed</li>
+        <li><code>priority</code> – low / medium / high</li>
+      </ul>
+      <p>Defined in <code>src/models/Task.js</code> with validation.</p>
+    </div>
+  </aside>
+</div>
+
+<script>
+const terminal = document.getElementById("terminal");
+
+function logTerminal(message, type="") {
+  const row = document.createElement("div");
+  row.className = type;
+  row.innerHTML = `<span class="prompt">$</span> ${message}`;
+  terminal.appendChild(row);
+  terminal.scrollTop = terminal.scrollHeight;
+}
+
+function esc(v) {
+  return String(v ?? "").replace(/[&<>"']/g, c => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  }[c]));
+}
+
+async function apiRequest(method, path, options={}) {
+  logTerminal(`<span class="req">${method} ${esc(path)}</span>`);
+  if (options.body) {
+    try { logTerminal(`<span class="muted">payload: ${esc(options.body)}</span>`); } catch(e) {}
+  }
+
+  const started = performance.now();
+  try {
+    const response = await fetch(path, options);
+    const elapsed = Math.round(performance.now() - started);
+    let data = null;
+    try { data = await response.json(); } catch(e) {}
+
+    let text = "";
+    if (data) {
+      const compact = JSON.stringify(data);
+      text = esc(compact.length > 180 ? compact.slice(0, 180) + "…" : compact);
+    }
+    logTerminal(
+      `<span class="${response.ok ? "ok" : "err"}">${response.status} ${response.statusText || ""} — ${elapsed}ms${text ? " — " + text : ""}</span>`,
+      response.ok ? "ok" : "err"
+    );
+    return {response, data};
+  } catch (error) {
+    logTerminal(`<span class="err">ERROR — ${esc(error.message)}</span>`, "err");
+    throw error;
+  }
+}
+
+function setStatus(text, ok) {
+  const el = document.getElementById("status");
+  el.textContent = text;
+  el.classList.toggle("off", !ok);
+}
+
+async function checkHealth() {
+  try {
+    const {response} = await apiRequest("GET", "/health");
+    setStatus(response.ok ? "API Online" : "API Error", response.ok);
+  } catch(e) {
+    setStatus("API Offline", false);
+  }
+}
+
+// Silent (not logged) fetch so the stat cards always show totals, even when filters are active
+async function refreshStats() {
+  try {
+    const res = await fetch("/api/tasks");
+    const data = await res.json();
+    const all = Array.isArray(data) ? data : (data?.tasks || []);
+    const count = s => all.filter(t => t.status === s).length;
+    document.getElementById("sTotal").textContent = all.length;
+    document.getElementById("sPending").textContent = count("pending");
+    document.getElementById("sProgress").textContent = count("in-progress");
+    document.getElementById("sDone").textContent = count("completed");
+  } catch(e) {}
+}
+
+async function loadTasks() {
+  try {
+    const params = new URLSearchParams();
+    const fs = document.getElementById("filterStatus").value;
+    const fp = document.getElementById("filterPriority").value;
+    if (fs) params.set("status", fs);
+    if (fp) params.set("priority", fp);
+    const qs = params.toString();
+    const {data} = await apiRequest("GET", "/api/tasks" + (qs ? "?" + qs : ""));
+    const tasks = Array.isArray(data) ? data : (data?.tasks || []);
+    const el = document.getElementById("tasks");
+    refreshStats();
+
+    if (!tasks.length) {
+      el.innerHTML = '<div class="empty">No tasks yet.</div>';
+      logTerminal(`<span class="ok">✓ Database query complete — 0 task(s)</span>`, "ok");
+      return;
+    }
+
+    el.innerHTML = tasks.map(t => `
+      <div class="task ${t.status === "completed" ? "done" : ""}">
+        <div>
+          <strong>${esc(t.title)}</strong>
+          <small>${esc(t.description || "")}</small>
+          <div style="margin-top:6px"><span class="pill ${esc(t.priority)}">${esc(t.priority)}</span><span class="pill ${esc(t.status)}">${esc(t.status)}</span></div>
+        </div>
+        <div class="actions">
+          <select onchange="updateStatus('${esc(t._id)}', this.value)">
+            ${["pending","in-progress","completed"].map(v => `<option value="${v}" ${t.status === v ? "selected" : ""}>${v}</option>`).join("")}
+          </select>
+          <button class="delete" onclick="deleteTask('${esc(t._id)}')">Delete</button>
+        </div>
+      </div>`).join("");
+
+    logTerminal(`<span class="ok">✓ Database query complete — ${tasks.length} task(s) loaded</span>`, "ok");
+  } catch(e) {
+    document.getElementById("tasks").innerHTML =
+      '<div class="empty">Unable to load tasks.</div>';
+  }
+}
+
+async function addTask() {
+  const title = document.getElementById("title").value.trim();
+  const description = document.getElementById("description").value.trim();
+
+  if (!title) {
+    logTerminal('<span class="err">ERROR — task title is required</span>', "err");
+    alert("Enter a task title");
+    return;
+  }
+
+  const priority = document.getElementById("priority").value;
+  const body = JSON.stringify({title, description, priority});
+  const {response} = await apiRequest("POST", "/api/tasks", {
+    method: "POST",
+    headers: {"Content-Type":"application/json"},
+    body
+  });
+
+  if (response.ok) {
+    document.getElementById("title").value = "";
+    document.getElementById("description").value = "";
+    await loadTasks();
+    runPipeline(); // replay the timeline after a task is added (demo)
+  }
+}
+
+async function updateStatus(id, status) {
+  const {response} = await apiRequest("PUT", "/api/tasks/" + id, {
+    method: "PUT",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify({status})
+  });
+  if (response.ok) await loadTasks();
+}
+
+async function deleteTask(id) {
+  const {response} = await apiRequest("DELETE", "/api/tasks/" + id, {
+    method: "DELETE"
+  });
+  if (response.ok) await loadTasks();
+}
+
+document.getElementById("title").addEventListener("keydown", e => {
+  if (e.key === "Enter") addTask();
+});
+document.getElementById("description").addEventListener("keydown", e => {
+  if (e.key === "Enter") addTask();
+});
+
+logTerminal('<span class="cmd">system</span> DevOps Task Manager UI started');
+logTerminal('<span class="cmd">docker</span> Connected to API container');
+logTerminal('<span class="cmd">mongodb</span> Ready for database queries');
+
+// ----- Pipeline timeline animation: steps light up one by one -----
+const tlStages = [
+  ["git",    "Commit pushed to main"],
+  ["test",   "npm test passed"],
+  ["docker", "Docker image built"],
+  ["k8s",    "kind cluster smoke test passed"],
+  ["ghcr",   "Image published to ghcr.io"]
+];
+let tlRunning = false;
+const wait = ms => new Promise(r => setTimeout(r, ms));
+
+async function runPipeline() {
+  if (tlRunning) return;
+  tlRunning = true;
+  const btn = document.getElementById("tlReplay");
+  btn.disabled = true; btn.textContent = "Running…";
+  const box = document.getElementById("tlNodes");
+  const nodes = [...box.querySelectorAll(".tl-node")];
+  const names = [...document.querySelectorAll(".tl-name")];
+  const labels = [...document.querySelectorAll(".tl-label[data-at]")];
+
+  nodes.forEach(n => n.classList.remove("done", "running"));
+  names.forEach(n => n.classList.remove("on"));
+  labels.forEach(l => l.classList.remove("on"));
+  box.style.setProperty("--p", 0);
+  await wait(400);
+
+  for (let i = 0; i < tlStages.length; i++) {
+    nodes[i].classList.add("running");
+    logTerminal(`<span class="cmd">pipeline</span> step ${i + 1}/6 running…`);
+    await wait(1100);
+    nodes[i].classList.remove("running");
+    nodes[i].classList.add("done");
+    names[i].classList.add("on");
+    box.style.setProperty("--p", i / 5);
+    labels.filter(l => +l.dataset.at === i).forEach(l => l.classList.add("on"));
+    logTerminal(`<span class="ok">✓ ${tlStages[i][1]}</span>`, "ok");
+  }
+  logTerminal('<span class="muted">pipeline: step 6/6 Deploy is manual (deploy-k8s.bat)</span>');
+  btn.disabled = false; btn.textContent = "Replay";
+  tlRunning = false;
+}
+checkHealth();
+loadTasks();
+runPipeline();
+</script>
+</body>
+</html>

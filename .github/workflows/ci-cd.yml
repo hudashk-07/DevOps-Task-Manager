@@ -1,0 +1,182 @@
+name: DevOps Task Manager CI/CD
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+
+# Least privilege by default; only the publish job gets "packages: write".
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  IMAGE_NAME: devops-task-manager
+  K8S_NAMESPACE: devops-task-manager
+
+jobs:
+  test:
+    name: Test Application
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate scripts and Compose file
+        run: |
+          bash -n run.sh
+          shellcheck run.sh
+          docker compose config --quiet
+
+      - name: Run tests
+        run: npm test
+
+  docker-build:
+    name: Build Image and Compose Smoke Test
+    runs-on: ubuntu-latest
+    needs: test
+    timeout-minutes: 15
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Start API + MongoDB with Docker Compose
+        run: docker compose up -d --build --wait --wait-timeout 180
+
+      - name: Smoke test
+        run: |
+          curl --fail --silent --show-error --retry 10 --retry-delay 2 --retry-connrefused http://localhost:5000/health
+          echo
+          curl --fail --silent --show-error -X POST http://localhost:5000/api/tasks \
+            -H "Content-Type: application/json" -d '{"title":"Compose smoke test"}'
+          echo
+          curl --fail --silent --show-error http://localhost:5000/api/tasks
+          echo
+
+      - name: Show container state on failure
+        if: failure()
+        run: |
+          docker compose ps -a
+          docker compose logs --tail=100
+
+      - name: Tear down (CI runner is ephemeral, so the volume can go too)
+        if: always()
+        run: docker compose down -v
+
+  kubernetes-deploy-test:
+    name: Deploy to temporary Kubernetes cluster (kind)
+    runs-on: ubuntu-latest
+    needs: test
+    timeout-minutes: 25
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Create kind cluster
+        uses: helm/kind-action@v1
+        with:
+          cluster_name: kind
+
+      - name: Build image and load it into the cluster
+        run: |
+          docker build -t "$IMAGE_NAME:1.0" .
+          kind load docker-image "$IMAGE_NAME:1.0" --name kind
+
+      - name: Apply manifests
+        run: |
+          kubectl apply -f k8s/namespace.yaml
+          # The Secret is not stored in the repository; create a random one for this run.
+          if ! kubectl get secret task-manager-secret -n "$K8S_NAMESPACE" >/dev/null 2>&1; then
+            kubectl create secret generic task-manager-secret -n "$K8S_NAMESPACE" \
+              --from-literal=MONGO_USERNAME=admin \
+              --from-literal=MONGO_PASSWORD="$(openssl rand -hex 16)"
+          fi
+          kubectl apply -f k8s/
+
+      - name: Wait for rollout
+        run: |
+          kubectl rollout status deployment/mongodb -n "$K8S_NAMESPACE" --timeout=180s
+          kubectl rollout status deployment/task-manager-api -n "$K8S_NAMESPACE" --timeout=300s
+
+      - name: Smoke test the API through the Service
+        run: |
+          kubectl port-forward svc/task-manager-api 5000:5000 -n "$K8S_NAMESPACE" >/tmp/port-forward.log 2>&1 &
+          PF_PID=$!
+          trap 'kill $PF_PID 2>/dev/null || true' EXIT
+          curl --fail --silent --show-error --retry 15 --retry-delay 2 --retry-connrefused http://localhost:5000/health
+          echo
+          curl --fail --silent --show-error -X POST http://localhost:5000/api/tasks \
+            -H "Content-Type: application/json" -d '{"title":"CI smoke test"}'
+          echo
+          curl --fail --silent --show-error http://localhost:5000/api/tasks
+          echo
+
+      - name: Show cluster state on failure
+        if: failure()
+        run: |
+          kubectl get all -n "$K8S_NAMESPACE" || true
+          kubectl describe pods -n "$K8S_NAMESPACE" || true
+          kubectl logs deployment/task-manager-api -n "$K8S_NAMESPACE" --tail=100 || true
+          kubectl logs deployment/mongodb -n "$K8S_NAMESPACE" --tail=50 || true
+          cat /tmp/port-forward.log || true
+
+  publish:
+    name: Publish Image to GHCR
+    runs-on: ubuntu-latest
+    needs: [test, docker-build, kubernetes-deploy-test]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Check registry credentials
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ -z "$TOKEN" ]; then
+            echo "::error::GITHUB_TOKEN is not available, cannot push to GHCR. Check Settings > Actions > General > Workflow permissions (needs read and write)."
+            exit 1
+          fi
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract image metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository_owner }}/devops-task-manager
+          tags: |
+            type=raw,value=latest
+            type=sha
+
+      - name: Build and push image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}

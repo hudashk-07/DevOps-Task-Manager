@@ -1,0 +1,15 @@
+node_modules
+npm-debug.log
+.git
+.github
+tests
+coverage
+README.md
+.env
+k8s
+*.bat
+logs
+.run
+run.sh
+docker-compose*.yml
+Dockerfile

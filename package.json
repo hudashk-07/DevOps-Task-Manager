@@ -1,0 +1,28 @@
+{
+  "name": "devops-task-manager",
+  "version": "1.0.0",
+  "description": "College DevOps project demonstrating Docker, Kubernetes and GitHub Actions.",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "start:local": "node --env-file=.env src/server.js",
+    "dev": "node --env-file=.env --watch src/server.js",
+    "test": "jest --runInBand"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "mongoose": "^8.9.5"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "mongodb-memory-server": "^10.1.4",
+    "supertest": "^7.0.0"
+  },
+  "engines": {
+    "node": ">=20.6"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testTimeout": 30000
+  }
+}

@@ -1,0 +1,4 @@
+DevOps Task Manager
+Selected experiments: 5 (Docker), 7 (Kubernetes), 8 (GitHub Actions CI/CD)
+Stack: Node.js + Express + MongoDB + Docker + Kubernetes + GitHub Actions
+Start here: README.md (Windows setup guide)
