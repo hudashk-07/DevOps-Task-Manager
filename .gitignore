@@ -5,3 +5,4 @@ coverage/
 npm-debug.log*
 logs/
 .run/
+k8s/secret.yaml
